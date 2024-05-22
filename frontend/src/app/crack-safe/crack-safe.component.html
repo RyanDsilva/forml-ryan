@@ -1,0 +1,43 @@
+<div class="w-full p-32 text-center">
+  <div
+    *ngIf="error_message != ''"
+    class="py-4 mb-2 bg-red-400 text-white block"
+  >
+    <p class="px-2">{{ error_message }}</p>
+  </div>
+  <div class="form">
+    <label
+      class="block text-gray-700 text-sm font-bold mb-2"
+      for="combination-input"
+      >Enter Actual Combination</label
+    >
+    <input
+      id="combination-input"
+      class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      type="text"
+      [formControl]="actual_combination"
+      pattern="[0-9]"
+      minlength="10"
+      maxlength="10"
+    />
+    <button
+      class="block mx-auto bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      type="button"
+      (click)="submitCombination()"
+    >
+      Submit
+    </button>
+  </div>
+  <br />
+  <div
+    *ngIf="
+      crack_safe_results.attempts != -1 && crack_safe_results.time_taken != -1
+    "
+    class="result mt-4"
+  >
+    Attempts: {{ crack_safe_results.attempts }}
+    <br />
+    Time Taken:
+    {{ crack_safe_results.time_taken.toFixed(2) }}
+  </div>
+</div>
