@@ -30,7 +30,8 @@ def home():
 @cache.cached(timeout=50, key_prefix="combinations")
 @app.route("/api/crack_safe", methods=["POST"])
 def crack_safe_post():
-    actual_combination = request.json["actual_combination"]
+    if not request.json["actual_combination"]:
+        return jsonify({"status": 404, "error_code": "INVALID_INPUT"})
     return jsonify(
         {"attempts": randint(100, 10000), "time_taken": uniform(10.01, 30.01)}
     )
